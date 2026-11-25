@@ -1,0 +1,6 @@
+{
+  "name": "Astral Hours",
+  "description": "Planetary Hours Practice Timer & Crystal and Chakra Companion with real-time solar/lunar astronomy, interactive 3D celestial sphere, and polyphonic singing-bowl soundscapes.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": []
+}

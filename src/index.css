@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Cinzel", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html,
+  body {
+    background-color: #070a14;
+    color: #eef2ff;
+    font-family: var(--font-sans);
+    min-height: 100%;
+    overflow-x: hidden;
+  }
+}
+
+.astral-nebula {
+  background-color: #070a14;
+  background-image:
+    radial-gradient(ellipse 85% 60% at 18% 8%, rgba(56, 103, 184, 0.16), transparent 62%),
+    radial-gradient(ellipse 70% 55% at 86% 24%, rgba(138, 180, 248, 0.11), transparent 58%),
+    radial-gradient(ellipse 80% 50% at 50% 96%, rgba(212, 175, 55, 0.08), transparent 64%);
+}
+
+/* Soft, fluid glassmorphism surfaces (never placed over raw WebGL canvas layers) */
+.astral-glass {
+  background: linear-gradient(145deg, rgba(18, 25, 49, 0.58), rgba(9, 13, 28, 0.42));
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.astral-glass-soft {
+  background: linear-gradient(160deg, rgba(16, 23, 45, 0.46), rgba(8, 12, 24, 0.3));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* WebGL-safe translucent frame (avoids backdrop-filter stall over active canvas) */
+.astral-webgl-stage {
+  background: radial-gradient(circle at 50% 45%, rgba(18, 28, 56, 0.55), rgba(7, 10, 20, 0.85));
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.astral-headline {
+  font-family: var(--font-display);
+  text-wrap: balance;
+}
+
+.astral-tabular {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Seamless horizontal flow slider with edge fade & hidden scrollbar */
+.astral-flow-track {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+  mask-image: linear-gradient(to right, transparent 0%, black 2.5%, black 97.5%, transparent 100%);
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 2.5%,
+    black 97.5%,
+    transparent 100%
+  );
+}
+
+.astral-flow-track::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
