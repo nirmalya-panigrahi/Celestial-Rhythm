@@ -251,19 +251,6 @@ export function Crystal3DViewer({crystal}: Crystal3DViewerProps) {
     });
     disposables.push(primaryMat);
 
-    // Dark basalt matrix pedestal
-    const matrixGeo = new THREE.DodecahedronGeometry(0.95, 1);
-    matrixGeo.scale(1.15, 0.36, 1.05);
-    const matrixMat = new THREE.MeshStandardMaterial({
-      color: 0x111827,
-      roughness: 0.85,
-      metalness: 0.12,
-    });
-    const matrixMesh = new THREE.Mesh(matrixGeo, matrixMat);
-    matrixMesh.position.y = -0.1;
-    cluster.add(matrixMesh);
-    disposables.push(matrixGeo, matrixMat);
-
     const sys = crystal.crystalSystem.toLowerCase();
 
     if (sys.includes('isometric')) {
@@ -435,28 +422,26 @@ export function Crystal3DViewer({crystal}: Crystal3DViewerProps) {
     };
   }, [crystal.id, crystal.crystalSystem, webglReady]);
 
+  const [, midHex] = CRYSTAL_PALETTES[crystal.id] ?? ['#e2e8f0', '#8ab4f8', '#1e293b'];
+
   return (
-    <div className="astral-webgl-stage relative flex h-[280px] w-full flex-col justify-between overflow-hidden rounded-3xl sm:h-[320px]">
+    <div className="relative flex h-[280px] w-full items-center justify-center sm:h-[340px]">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute h-52 w-52 rounded-full opacity-25 blur-3xl transition-colors duration-500"
+        style={{backgroundColor: midHex}}
+      />
       {webglReady && !contextLost ? (
         <div
           ref={mountRef}
-          className="absolute inset-0 cursor-grab active:cursor-grabbing"
+          className="relative z-10 h-full w-full cursor-grab active:cursor-grabbing"
           aria-label={`Interactive 3D crystal mesh for ${crystal.name}`}
         />
       ) : (
-        <div className="absolute inset-0 flex items-center justify-center p-6">
-          <CrystalSpecimenGraphic crystal={crystal} large />
+        <div className="relative z-10 flex items-center justify-center p-6">
+          <CrystalSpecimenGraphic crystal={crystal} large selected />
         </div>
       )}
-
-      <div className="pointer-events-none relative z-10 flex items-center justify-between px-5 pt-4 text-xs text-slate-300">
-        <span>{crystal.crystalSystem} Mesh</span>
-        <span className="text-slate-400">Drag to inspect 3D</span>
-      </div>
-
-      <div className="pointer-events-none relative z-10 px-5 pb-4 text-xs text-slate-400">
-        <span className="astral-tabular">Mohs {crystal.mohsHardness}</span>
-      </div>
     </div>
   );
 }

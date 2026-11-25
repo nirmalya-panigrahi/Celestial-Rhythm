@@ -4,7 +4,7 @@ import cosmicNebulaImg from '../assets/images/cosmic_nebula_banner_1795601845261
 import crystalMalachiteImg from '../assets/images/crystal_malachite_copper_1795601846171.jpg';
 import crystalQuartzImg from '../assets/images/crystal_quartz_amethyst_1795601845715.jpg';
 import crystalSeleniteImg from '../assets/images/crystal_selenite_moonstone_1795601847296.jpg';
-import type {ChakraId, CrystalItem} from '../types/astral';
+import type {ChakraId, CrystalItem, PlanetId} from '../types/astral';
 
 export const STUDIO_IMAGES = {
   cosmicNebula: cosmicNebulaImg,
@@ -49,6 +49,165 @@ export function ResilientImage({
       onError={() => setFailed(true)}
       className={className}
     />
+  );
+}
+
+/**
+ * Crisp inline-SVG planetary glyphs (guarantees zero OS purple emoji square fallback)
+ */
+export function PlanetGlyph({
+  planet,
+  color = 'currentColor',
+  size = 18,
+  className = '',
+}: {
+  planet: PlanetId;
+  color?: string;
+  size?: number;
+  className?: string;
+}) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke={color}
+      strokeWidth="1.65"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      {planet === 'Sun' && (
+        <>
+          <circle cx="12" cy="12" r="7.5" />
+          <circle cx="12" cy="12" r="1.6" fill={color} stroke="none" />
+        </>
+      )}
+      {planet === 'Moon' && (
+        <path d="M15.8 4.8a7.8 7.8 0 1 0 0 14.4 6.2 6.2 0 0 1 0-14.4Z" />
+      )}
+      {planet === 'Mercury' && (
+        <>
+          <circle cx="12" cy="10.5" r="4.2" />
+          <path d="M8.5 4.2a4.2 4.2 0 0 0 7 0" />
+          <path d="M12 14.7V20" />
+          <path d="M9 17.5h6" />
+        </>
+      )}
+      {planet === 'Venus' && (
+        <>
+          <circle cx="12" cy="9.2" r="4.8" />
+          <path d="M12 14v6.2" />
+          <path d="M9 17.5h6" />
+        </>
+      )}
+      {planet === 'Mars' && (
+        <>
+          <circle cx="10" cy="14" r="5" />
+          <path d="M13.6 10.4 19 5" />
+          <path d="M14.5 5H19v4.5" />
+        </>
+      )}
+      {planet === 'Jupiter' && (
+        <>
+          <path d="M7 7.5a3.5 3.5 0 0 1 6.5 1.8c0 2.7-4.5 5.2-6.5 6.7h10" />
+          <path d="M14.5 5v14.5" />
+        </>
+      )}
+      {planet === 'Saturn' && (
+        <>
+          <path d="M8.5 4.5v13.5" />
+          <path d="M6 7.5h5" />
+          <path d="M8.5 11.8c2.2-1.8 6-1.2 6 1.8 0 2.4-2.2 3.8-1 5.4.7.8 2 .8 3-.2" />
+        </>
+      )}
+    </svg>
+  );
+}
+
+/**
+ * Crisp inline-SVG zodiac glyphs for each planetary correspondence
+ */
+export function ZodiacGlyph({
+  planet,
+  color = 'currentColor',
+  size = 14,
+  className = '',
+}: {
+  planet: PlanetId;
+  color?: string;
+  size?: number;
+  className?: string;
+}) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke={color}
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      {/* Leo (Sun) */}
+      {planet === 'Sun' && (
+        <>
+          <circle cx="7.5" cy="14" r="2.8" />
+          <path d="M9.6 12C10.5 7 15.5 5.8 17.2 9.2c1.2 2.4-1 6-1 8 0 1.4 1.3 2 2.5 1.2" />
+        </>
+      )}
+      {/* Cancer (Moon) */}
+      {planet === 'Moon' && (
+        <>
+          <circle cx="7.5" cy="9.5" r="2.5" />
+          <path d="M9.5 7.5c3.5-1.4 7.8-.6 9.8 1.5" />
+          <circle cx="16.5" cy="14.5" r="2.5" />
+          <path d="M14.5 16.5c-3.5 1.4-7.8.6-9.8-1.5" />
+        </>
+      )}
+      {/* Gemini (Mercury) */}
+      {planet === 'Mercury' && (
+        <>
+          <path d="M6 6.5c4 1.8 8 1.8 12 0" />
+          <path d="M6 17.5c4-1.8 8-1.8 12 0" />
+          <path d="M9.5 7.4v9.2M14.5 7.4v9.2" />
+        </>
+      )}
+      {/* Libra (Venus) */}
+      {planet === 'Venus' && (
+        <>
+          <path d="M5 17.5h14" />
+          <path d="M5 14h4a3.3 3.3 0 1 1 6 0h4" />
+        </>
+      )}
+      {/* Aries (Mars) */}
+      {planet === 'Mars' && (
+        <>
+          <path d="M12 19V10" />
+          <path d="M12 10c0-3.8-4.8-5.2-6.5-2.2-.8 1.4 0 3 1.4 3.2" />
+          <path d="M12 10c0-3.8 4.8-5.2 6.5-2.2.8 1.4 0 3-1.4 3.2" />
+        </>
+      )}
+      {/* Sagittarius (Jupiter) */}
+      {planet === 'Jupiter' && (
+        <>
+          <path d="M6 18 18 6" />
+          <path d="M12.5 6H18v5.5" />
+          <path d="M7.5 11.5 12.5 16.5" />
+        </>
+      )}
+      {/* Capricorn (Saturn) */}
+      {planet === 'Saturn' && (
+        <>
+          <path d="M5.5 7.5 8.5 15l3.5-7.5 2.5 6.5c.8 2 3.5 2.5 4.2.5.6-1.8-1.2-3.2-2.6-2-1.4 1.2-.8 4.8 1.4 5.5" />
+        </>
+      )}
+    </svg>
   );
 }
 
@@ -173,9 +332,11 @@ export const CRYSTAL_PALETTES: Record<string, [string, string, string]> = {
 export function CrystalSpecimenGraphic({
   crystal,
   large = false,
+  selected = false,
 }: {
   crystal: CrystalItem;
   large?: boolean;
+  selected?: boolean;
 }) {
   const [light, mid, dark] = CRYSTAL_PALETTES[crystal.id] ?? ['#e2e8f0', '#64748b', '#1e293b'];
   const uid = `${crystal.id}-${large ? 'lg' : 'sm'}`;
@@ -183,22 +344,25 @@ export function CrystalSpecimenGraphic({
 
   return (
     <div
-      className={`relative flex w-full items-center justify-center overflow-hidden rounded-2xl ${
-        large ? 'h-48' : 'h-36'
+      className={`relative flex w-full items-center justify-center ${
+        large ? 'h-48' : 'h-32'
       }`}
     >
-      {/* Ambient mineral glow */}
+      {/* Soft radial mineral glow — no card box or border */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute h-28 w-28 rounded-full opacity-30 blur-2xl"
-        style={{backgroundColor: mid}}
+        className="pointer-events-none absolute h-24 w-24 rounded-full blur-2xl transition-opacity duration-300"
+        style={{
+          background: `radial-gradient(circle, ${mid} 0%, transparent 72%)`,
+          opacity: selected ? 0.55 : 0.28,
+        }}
       />
 
       <svg
         viewBox="0 0 180 130"
-        className={`relative drop-shadow-[0_12px_20px_rgba(0,0,0,0.6)] ${
-          large ? 'h-44 w-56' : 'h-32 w-44'
-        }`}
+        className={`relative drop-shadow-[0_14px_22px_rgba(0,0,0,0.65)] transition-transform duration-300 ${
+          large ? 'h-44 w-56' : 'h-28 w-40'
+        } ${selected ? 'scale-110' : 'group-hover:scale-105'}`}
         aria-hidden="true"
       >
         <defs>
@@ -219,27 +383,14 @@ export function CrystalSpecimenGraphic({
           </radialGradient>
         </defs>
 
-        {/* Subtle dark basalt matrix base */}
-        <polygon
-          points="36,104 62,94 118,94 144,104 126,116 54,116"
-          fill="#0f172a"
-          stroke="#ffffff"
-          strokeOpacity="0.1"
-          strokeWidth="0.7"
-        />
-
         {sys.includes('isometric') ? (
-          /* 3-Cube Isometric Pyrite / Fluorite / Garnet Cluster (18 optical facets) */
           <g>
-            {/* Left satellite cube */}
             <polygon points="56,48 76,58 56,68 36,58" fill={light} fillOpacity="0.88" />
             <polygon points="36,58 56,68 56,96 36,86" fill={mid} fillOpacity="0.9" />
             <polygon points="56,68 76,58 76,86 56,96" fill={dark} fillOpacity="0.95" />
-            {/* Right satellite cube */}
             <polygon points="124,46 144,56 124,66 104,56" fill={light} fillOpacity="0.85" />
             <polygon points="104,56 124,66 124,96 104,86" fill={mid} fillOpacity="0.88" />
             <polygon points="124,66 144,56 144,86 124,96" fill={dark} fillOpacity="0.96" />
-            {/* Center Hero Cube */}
             <polygon points="90,22 122,38 90,54 58,38" fill={`url(#refract-${uid})`} />
             <polygon points="90,22 122,38 90,54 58,38" fill={light} fillOpacity="0.6" />
             <polygon points="58,38 90,54 90,100 58,84" fill={`url(#body-${uid})`} />
@@ -255,7 +406,6 @@ export function CrystalSpecimenGraphic({
             <line x1="90" y1="54" x2="90" y2="100" stroke="#ffffff" strokeOpacity="0.4" strokeWidth="0.8" />
           </g>
         ) : crystal.id === 'malachite' ? (
-          /* Concentric Botryoidal Malachite Cluster */
           <g>
             <ellipse cx="90" cy="68" rx="48" ry="34" fill={dark} stroke={light} strokeOpacity="0.3" />
             <circle cx="74" cy="64" r="24" fill={mid} stroke={light} strokeWidth="1.6" strokeOpacity="0.75" />
@@ -270,22 +420,18 @@ export function CrystalSpecimenGraphic({
             <ellipse cx="78" cy="50" rx="18" ry="8" fill="#ffffff" fillOpacity="0.16" />
           </g>
         ) : sys.includes('monoclinic') || sys.includes('triclinic') || sys.includes('orthorhombic') ? (
-          /* Radiating Multi-Blade Satin / Feldspar Cluster */
           <g>
             <polygon points="50,36 62,30 78,100 62,102" fill={dark} fillOpacity="0.9" />
             <polygon points="130,34 118,28 102,100 118,102" fill={mid} fillOpacity="0.85" />
             <polygon points="68,20 84,16 90,102 72,102" fill={`url(#body-${uid})`} />
             <polygon points="104,22 118,28 104,102 90,102" fill={mid} fillOpacity="0.9" />
-            {/* Hero central crystal blade */}
             <polygon points="82,12 100,15 104,104 78,104" fill={`url(#body-${uid})`} />
             <polygon points="82,12 91,18 91,104 78,104" fill={`url(#refract-${uid})`} />
             <polygon points="91,18 100,15 104,104 91,104" fill={dark} fillOpacity="0.35" />
-            {/* Fine longitudinal striations */}
             <line x1="85" y1="20" x2="83" y2="98" stroke="#ffffff" strokeOpacity="0.4" strokeWidth="0.7" />
             <line x1="94" y1="20" x2="96" y2="98" stroke="#ffffff" strokeOpacity="0.25" strokeWidth="0.7" />
           </g>
         ) : sys.includes('amorphous') ? (
-          /* Conchoidal Obsidian Glassy Fracture Cluster */
           <g>
             <polygon points="60,44 82,22 96,102 52,100" fill={dark} />
             <polygon points="88,16 122,48 112,102 74,102 68,46" fill={`url(#body-${uid})`} />
@@ -294,16 +440,12 @@ export function CrystalSpecimenGraphic({
             <path d="M 70 50 Q 94 58 120 48" fill="none" stroke={light} strokeOpacity="0.35" strokeWidth="0.8" />
           </g>
         ) : (
-          /* 5-Point Terminated Hexagonal Quartz / Beryl Cluster (22 facets) */
           <g>
-            {/* Left & Right secondary points */}
             <polygon points="44,50 56,42 66,102 48,102" fill={dark} fillOpacity="0.88" />
             <polygon points="56,42 60,52 66,102 56,102" fill={mid} fillOpacity="0.75" />
             <polygon points="134,46 120,38 112,102 130,102" fill={mid} fillOpacity="0.85" />
-            {/* Mid-left & mid-right points */}
             <polygon points="64,30 78,24 82,102 60,102" fill={`url(#body-${uid})`} />
             <polygon points="116,28 102,22 96,102 118,102" fill={dark} fillOpacity="0.85" />
-            {/* Hero central doubly-faceted point */}
             <polygon points="90,10 107,32 104,104 76,104 73,32" fill={`url(#body-${uid})`} />
             <polygon points="90,10 90,104 76,104 73,32" fill={`url(#refract-${uid})`} />
             <polygon points="90,10 107,32 90,40 73,32" fill={light} fillOpacity="0.62" />
@@ -320,7 +462,6 @@ export function CrystalSpecimenGraphic({
           </g>
         )}
 
-        {/* Specular star glints on facets */}
         <circle cx="90" cy="24" r="1.4" fill="#ffffff" fillOpacity="0.85" />
         <circle cx="76" cy="48" r="1" fill="#ffffff" fillOpacity="0.65" />
       </svg>

@@ -7,13 +7,12 @@ import type {PlanetId} from '../types/astral';
 import type {BreathStateSnapshot} from '../utils/breathEngine';
 import {BreathOrbOverlay} from './BreathOrbOverlay';
 
-import {STUDIO_IMAGES, ResilientImage} from './VisualAssets';
-
 interface CelestialGlobeProps {
   activePlanet: PlanetId;
   sessionStatus: 'idle' | 'active' | 'paused' | 'completed';
   breathSnapshot: BreathStateSnapshot | null;
   remainingSec: number;
+  embedded?: boolean;
 }
 
 const _vec3 = new THREE.Vector3();
@@ -47,6 +46,7 @@ export function CelestialGlobe({
   sessionStatus,
   breathSnapshot,
   remainingSec,
+  embedded = false,
 }: CelestialGlobeProps) {
   const mountRef = useRef<HTMLDivElement | null>(null);
   const activePlanetRef = useRef<PlanetId>(activePlanet);
@@ -114,7 +114,7 @@ export function CelestialGlobe({
     pmremGenerator.dispose();
 
     const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 100);
-    camera.position.set(0, 1.35, 5.4);
+    camera.position.set(0, 1.35, embedded ? 5.95 : 5.4);
 
     const controls = new OrbitControls(camera, canvas);
     controls.enableZoom = false;
@@ -403,12 +403,11 @@ export function CelestialGlobe({
   const planetProfile = PLANET_PROFILES[activePlanet];
 
   return (
-    <div className="astral-webgl-stage relative flex min-h-[420px] w-full flex-col justify-between overflow-hidden rounded-3xl sm:min-h-[500px] lg:min-h-[540px]">
-      <ResilientImage
-        src={STUDIO_IMAGES.cosmicNebula}
-        alt="Cosmic starfield horizon"
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-30"
-      />
+    <div
+      className={`relative flex w-full flex-col justify-center overflow-visible ${
+        embedded ? 'h-full min-h-0' : 'min-h-[380px] sm:min-h-[440px]'
+      }`}
+    >
       {webglAvailable && !contextLost ? (
         <div
           ref={mountRef}
@@ -416,7 +415,7 @@ export function CelestialGlobe({
           aria-label={`Interactive 3D celestial sphere highlighting ${planetProfile.name}`}
         />
       ) : (
-        <div className="absolute inset-0 flex items-center justify-center p-8">
+        <div className="flex items-center justify-center p-6">
           <svg viewBox="0 0 280 280" className="h-64 w-64 opacity-85" aria-hidden="true">
             <circle cx="140" cy="140" r="102" stroke="#8ab4f8" strokeOpacity="0.35" fill="none" />
             <ellipse
@@ -443,14 +442,7 @@ export function CelestialGlobe({
         </div>
       )}
 
-      <div className="pointer-events-none relative z-10 flex items-center justify-between px-4 pt-4 text-xs text-slate-300">
-        <span className="font-medium text-slate-100">
-          {planetProfile.glyph} {planetProfile.name}
-        </span>
-        <span className="text-slate-400">Drag to orbit</span>
-      </div>
-
-      <div className="pointer-events-none relative z-10 flex flex-1 items-center justify-center px-4 py-6">
+      <div className="pointer-events-none relative z-10 flex items-center justify-center px-4 py-6">
         <BreathOrbOverlay
           isActive={sessionStatus === 'active'}
           isPaused={sessionStatus === 'paused'}
@@ -459,11 +451,6 @@ export function CelestialGlobe({
           remainingSec={remainingSec}
           accentHex={planetProfile.accentHex}
         />
-      </div>
-
-      <div className="pointer-events-none relative z-10 flex items-center justify-between px-4 pb-3.5 text-xs text-slate-400">
-        <span>{planetProfile.zodiacGlyph} {planetProfile.zodiacCorrespondence}</span>
-        <span className="astral-tabular">{planetProfile.frequencyHz.toFixed(1)} Hz</span>
       </div>
     </div>
   );

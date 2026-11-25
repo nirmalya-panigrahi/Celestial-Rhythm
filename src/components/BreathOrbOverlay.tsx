@@ -47,28 +47,28 @@ export function BreathOrbOverlay({
 
     if (phase === 'Inhale') {
       gsap.to(outer, {
-        scale: 1.22,
+        scale: 1.24,
         opacity: 0.96,
         duration: phaseDuration,
         ease: 'sine.inOut',
         overwrite: 'auto',
       });
       gsap.to(inner, {
-        scale: 1.16,
+        scale: 1.15,
         duration: phaseDuration,
         ease: 'sine.inOut',
         overwrite: 'auto',
       });
     } else if (phase === 'Hold') {
       gsap.to(outer, {
-        scale: 1.24,
+        scale: 1.26,
         opacity: 1,
         duration: phaseDuration,
         ease: 'none',
         overwrite: 'auto',
       });
       gsap.to(inner, {
-        scale: 1.18,
+        scale: 1.17,
         duration: phaseDuration,
         ease: 'none',
         overwrite: 'auto',
@@ -82,7 +82,7 @@ export function BreathOrbOverlay({
         overwrite: 'auto',
       });
       gsap.to(inner, {
-        scale: 0.75,
+        scale: 0.76,
         duration: phaseDuration,
         ease: 'sine.inOut',
         overwrite: 'auto',
@@ -96,7 +96,7 @@ export function BreathOrbOverlay({
         overwrite: 'auto',
       });
       gsap.to(inner, {
-        scale: 0.74,
+        scale: 0.75,
         duration: phaseDuration,
         ease: 'none',
         overwrite: 'auto',
@@ -127,15 +127,15 @@ export function BreathOrbOverlay({
       <div className={`relative flex items-center justify-center ${ringSize}`}>
         <div
           ref={outerRingRef}
-          className="absolute inset-0 rounded-full border-2"
+          className="absolute inset-0 rounded-full border"
           style={{
             borderColor: accentHex,
-            boxShadow: `0 0 36px ${accentHex}33, inset 0 0 28px ${accentHex}1f`,
+            boxShadow: `0 0 42px ${accentHex}44, inset 0 0 32px ${accentHex}22`,
           }}
         />
         <div
           ref={innerCoreRef}
-          className="flex h-3/4 w-3/4 flex-col items-center justify-center rounded-full border border-white/15 bg-[#070a14]/75 px-4"
+          className="flex h-3/4 w-3/4 flex-col items-center justify-center rounded-full bg-[#070a14]/55 px-4 backdrop-blur-sm"
         >
           {isCompleted ? (
             <>
@@ -161,7 +161,7 @@ export function BreathOrbOverlay({
       </div>
 
       {!isCompleted && snapshot && (
-        <p className="mt-4 max-w-xs rounded-lg border border-white/10 bg-[#070a14]/80 px-3.5 py-2 text-xs text-slate-200">
+        <p className="mt-4 max-w-xs text-xs text-slate-200 drop-shadow-[0_2px_8px_rgba(7,10,20,0.9)]">
           {snapshot.instruction}
         </p>
       )}

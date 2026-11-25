@@ -25,9 +25,9 @@ export const PLANET_PROFILES: Record<PlanetId, PlanetProfile> = {
   Saturn: {
     id: 'Saturn',
     name: 'Saturn',
-    glyph: '♄',
+    glyph: '♄\uFE0E',
     zodiacCorrespondence: 'Capricorn / Aquarius',
-    zodiacGlyph: '♑',
+    zodiacGlyph: '♑\uFE0E',
     chakra: 'Root',
     pairedStones: ['Smoky Quartz', 'Obsidian', 'Black Tourmaline'],
     practiceFocus:
@@ -39,9 +39,9 @@ export const PLANET_PROFILES: Record<PlanetId, PlanetProfile> = {
   Jupiter: {
     id: 'Jupiter',
     name: 'Jupiter',
-    glyph: '♃',
+    glyph: '♃\uFE0E',
     zodiacCorrespondence: 'Sagittarius / Pisces',
-    zodiacGlyph: '♐',
+    zodiacGlyph: '♐\uFE0E',
     chakra: 'Third Eye',
     pairedStones: ['Amethyst', 'Lapis Lazuli', 'Labradorite'],
     practiceFocus:
@@ -53,9 +53,9 @@ export const PLANET_PROFILES: Record<PlanetId, PlanetProfile> = {
   Mars: {
     id: 'Mars',
     name: 'Mars',
-    glyph: '♂',
+    glyph: '♂\uFE0E',
     zodiacCorrespondence: 'Aries / Scorpio',
-    zodiacGlyph: '♈',
+    zodiacGlyph: '♈\uFE0E',
     chakra: 'Solar Plexus',
     pairedStones: ['Red Jasper', 'Carnelian', 'Garnet'],
     practiceFocus:
@@ -67,9 +67,9 @@ export const PLANET_PROFILES: Record<PlanetId, PlanetProfile> = {
   Sun: {
     id: 'Sun',
     name: 'Sun',
-    glyph: '☉',
+    glyph: '☉\uFE0E',
     zodiacCorrespondence: 'Leo',
-    zodiacGlyph: '♌',
+    zodiacGlyph: '♌\uFE0E',
     chakra: 'Solar Plexus',
     pairedStones: ['Citrine', 'Sunstone', "Tiger's Eye"],
     practiceFocus:
@@ -81,9 +81,9 @@ export const PLANET_PROFILES: Record<PlanetId, PlanetProfile> = {
   Venus: {
     id: 'Venus',
     name: 'Venus',
-    glyph: '♀',
+    glyph: '♀\uFE0E',
     zodiacCorrespondence: 'Taurus / Libra',
-    zodiacGlyph: '♎',
+    zodiacGlyph: '♎\uFE0E',
     chakra: 'Heart',
     pairedStones: ['Rose Quartz', 'Green Aventurine', 'Rhodonite'],
     practiceFocus:
@@ -95,9 +95,9 @@ export const PLANET_PROFILES: Record<PlanetId, PlanetProfile> = {
   Mercury: {
     id: 'Mercury',
     name: 'Mercury',
-    glyph: '☿',
+    glyph: '☿\uFE0E',
     zodiacCorrespondence: 'Gemini / Virgo',
-    zodiacGlyph: '♊',
+    zodiacGlyph: '♊\uFE0E',
     chakra: 'Throat',
     pairedStones: ['Aquamarine', 'Kyanite', 'Fluorite'],
     practiceFocus:
@@ -109,9 +109,9 @@ export const PLANET_PROFILES: Record<PlanetId, PlanetProfile> = {
   Moon: {
     id: 'Moon',
     name: 'Moon',
-    glyph: '☽',
+    glyph: '☽\uFE0E',
     zodiacCorrespondence: 'Cancer',
-    zodiacGlyph: '♋',
+    zodiacGlyph: '♋\uFE0E',
     chakra: 'Crown',
     pairedStones: ['Moonstone', 'Selenite', 'Celestite'],
     practiceFocus:

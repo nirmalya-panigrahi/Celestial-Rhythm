@@ -14,23 +14,21 @@ A single-page astronomical practice timer and mineralogical companion combining 
 - **Now (Sky Clock & 3-Minute Practice)**:
   - Computes exact local sunrise, sunset, and next sunrise via `suncalc` using browser Geolocation or manual city/coordinate fallback.
   - Divides daytime and nighttime into 12 unequal solar hours each using the Chaldean order (`Saturn → Jupiter → Mars → Sun → Venus → Mercury → Moon`) starting from the day-ruler at sunrise.
-  - Interactive Three.js 3D wireframe celestial globe with meridian rings, 23.4° tilted antique-gold ecliptic ring, star-node constellations, OrbitControls, and a pulsing active planetary ruler node.
-  - Optional 3-minute coherence breath session with GSAP breathing guide overlay, Tone.js harmonic singing-bowl drone, and optional Browser Notification hour-change nudges.
-  - 24-hour Chaldean progression strip to inspect any daytime or nighttime hour.
+  - Interactive Three.js 3D wireframe celestial globe framed inside a circular 24-hour Chaldean orbital ring over a cosmic nebula backdrop, with active planetary hour readout card on the left and a rotating sacred mandala backdrop across all views.
+  - Optional 3-minute coherence breath session with GSAP breathing guide overlay, Tone.js harmonic singing-bowl drone, and Browser Notification hour-change nudges.
 - **Chakra Sessions**:
-  - Dedicated cards and practice studio for all 7 Chakras (Root `396 Hz` to Crown `963 Hz`).
-  - Custom duration selectors (`3`, `5`, `10` min), breath cadences (`Box 4-4-4-4`, `Coherence 5-5`, `Relax 4-7-8`), GSAP visual breath pacer, and polyphonic Tone.js soundscapes with stereo reverb.
+  - Glassmorphism hero stage pairing custom duration pills (`3`, `5`, `10` min), breath cadences (`Box Breathing 4-4-4-4`, `Coherence 5-5`, `Relax 4-7-8`), and an interactive 7-chakra alignment figure with color-matched chakra rings, GSAP breath orb, and polyphonic Tone.js soundscapes.
+  - Smooth-scrolling horizontal **Chakra Flow** carousel across all 7 chakras (`Root` through `Crown`) with quick practice selection.
 - **Crystal Vault**:
-  - Scientifically accurate dataset of **30 minerals** with mineral group, Mohs hardness, crystal system, mapped chakra, traditional lore, cleansing method, and water safety ratings (`Safe`, `Caution`, `Unsafe / Toxic`—flagging water-soluble Selenite/Celestite, oxidizing Pyrite, and copper-toxic Malachite/Azurite/Chrysocolla).
-  - Dynamic **Moon-Charging Banner** driven by `suncalc.getMoonIllumination` highlighting Full Moon charging and New Moon dry/sound cleansing windows.
-  - Search, Chakra & Water Safety filters, `My Collection` toggle, and per-stone personal notes persisted in `localStorage`.
+  - Scientifically accurate dataset of **30 minerals** with Mohs hardness, mapped chakra, cleansing tip, and conditional water-safety alerts (`Caution` and `Unsafe / Toxic`—flagging water-soluble Selenite/Celestite, oxidizing Pyrite, and copper-toxic Malachite/Azurite/Chrysocolla).
+  - Slim 1-line `suncalc` lunar phase & charging indicator, underlined search/chakra/water-safe filters, and a floating Three.js physical-mesh crystal inspector paired with a radial-glow specimen gallery.
 
 ## Architecture
 
 ```mermaid
 flowchart TD
   App[App.tsx] --> Nav[TopNav + LocationDrawer]
-  App --> Bg[StarfieldBackground · tsParticles]
+  App --> Bg[StarfieldBackground + MandalaBackground · GSAP]
   App --> Hooks
 
   subgraph Hooks[State & Domain Hooks]
@@ -43,9 +41,9 @@ flowchart TD
   Clock --> Calc[planetaryHours.ts & lunarPhase.ts]
   Breath --> Audio[soundEngine.ts · PolySynth + Reverb]
 
-  App --> Tab1[NowTab + CelestialGlobe · Three.js + GSAP]
-  App --> Tab2[ChakraSessionsTab + BreathOrbOverlay · GSAP]
-  App --> Tab3[CrystalVaultTab · 30-Stone Dataset]
+  App --> Tab1[NowTab + CelestialGlobe + Orbital 24h Ring · Three.js + GSAP]
+  App --> Tab2[ChakraSessionsTab + Chakra Flow Carousel · SVG + GSAP]
+  App --> Tab3[CrystalVaultTab + Crystal3DViewer · Three.js + GSAP]
 ```
 
 ## Getting Started
