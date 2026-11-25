@@ -70,4 +70,5 @@ flowchart TD
 
 ## GitHub Pages Deployment
 
-Push to `main` to trigger `.github/workflows/deploy.yml`, which runs type-checking, Vitest unit/integration tests, builds the static bundle with `VITE_BASE_PATH` set to the repository name, and deploys `./dist` to GitHub Pages.
+Push to `main` to trigger `.github/workflows/deploy.yml`, which runs type-checking, Vitest unit/integration tests, builds the static bundle and deploys `./dist` to GitHub Pages.
+
